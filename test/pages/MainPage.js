@@ -10,12 +10,13 @@ class MainPage extends BaseForm {
     this.uniqueElement = new Texttxt("//h1[contains(text(),'todos')]", "React-Todo-List is opened");
   }
 
-  get toDoField() { return new Field("//input[@type='text']", "input todo's name to the field") };
-  get submitButton() { return new Link("//button[@type='submit']", "submit button") };
+  get toDoField() { return new Field("//input[@type='text']", "Input todo's name to the field") };
+  get submitButton() { return new Link("//button[@type='submit']", "Submit button") };
   get toDoList() { return new Texttxt("//span", "ToDoList")}
-  get toDoListCheckboxes() { return new CheckBox("//input[@type='checkbox']", "toDo list of checkboxes") };
-  get linedTodo() { return new CheckBox("//span[contains(@style,'line-through')]", "toDo item is lined through") };
-
+  get toDoListCheckboxes() { return new CheckBox("//input[@type='checkbox']", "ToDo list of checkboxes") };
+  get linedTodo() { return new CheckBox("//span[contains(@style,'line-through')]", "ToDo item is lined through") };
+  get DeleteButtons() { return new Link("//button[contains(@type,'button')]", "Delete button") };
+  
   async inputTodoName(value) {
     await this.toDoField.setValue(value);
   }
@@ -34,6 +35,10 @@ class MainPage extends BaseForm {
 
   async getCompletedItem() {
     return this.linedTodo.getElement();
+  }
+
+  async getDeleteButtons() {
+    return this.DeleteButtons.getElements();
   }
 }
 

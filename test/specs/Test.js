@@ -29,7 +29,11 @@ describe("React-Todo-List UI Test", function () {
     let textDecor = data.style.textDecoration;
     assert.include(toDoTextDec, textDecor, "text-decoration should be equal to line-through");
     let toDoText = await completedItem.getHTML(false);
-    console.log(toDoText);
-
+    let itemIndex = list.indexOf(toDoText);
+    let deleteButtonsList = await MainPage.getDeleteButtons();
+    let deleteButton = deleteButtonsList[itemIndex];
+    await deleteButton.click();
+    let itemList = await MainPage.getToDos();
+    assert.notExists(itemList[itemIndex], "deleted item not exists in the list");
   })
 })
